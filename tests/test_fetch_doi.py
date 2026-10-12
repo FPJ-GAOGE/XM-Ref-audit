@@ -8,7 +8,7 @@ from unittest.mock import patch
 import urllib.error
 
 ROOT = Path(__file__).resolve().parents[1]
-spec = importlib.util.spec_from_file_location("fetch_doi", ROOT / "skills/xiaoming-reference-audit-skill/scripts/fetch_doi.py")
+spec = importlib.util.spec_from_file_location("fetch_doi", ROOT / "skills/xm-ref-audit/scripts/fetch_doi.py")
 module = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(module)
 DOI = "10.5555/synthetic-test"

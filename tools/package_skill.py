@@ -4,7 +4,7 @@ from pathlib import Path
 import zipfile
 
 ROOT = Path(__file__).resolve().parents[1]
-NAME = "xiaoming-reference-audit-skill"
+NAME = "xm-ref-audit"
 
 
 def build(output):

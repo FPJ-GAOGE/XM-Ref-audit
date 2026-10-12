@@ -1,9 +1,9 @@
 ---
-name: xiaoming-reference-audit-skill
+name: xm-ref-audit
 description: 检查并修正 Word、PDF、LaTeX 等文章的文内引用与文末参考文献，按页数预算选择极简、常规或详细呈现，并逐条联网核实文献身份、出版状态及对原文论断的支持。用于已写文章的引用审校、信息补全和真实性核查。
 ---
 
-# xiaoming's reference-audit-skill
+# XM-Ref-audit
 
 依据 Xiaoming Duan 的《How to Format Your Bibliography “Properly”?》（2023-05-08）整理。先读 [PPT 规则及来源映射](references/ppt-rules.md)。三档呈现、页数适配及证据核查是用户要求的扩展，不是 PPT 原有标准。
 
@@ -13,7 +13,7 @@ description: 检查并修正 Word、PDF、LaTeX 等文章的文内引用与文�
 
 - 按当前平台实际提供的文件、终端、网页检索和文档工具完成步骤，不依赖 Codex 专属工具名、插件、API 密钥或固定本机路径。脚本仅需 Python 3.10+ 标准库；文档解析和渲染工具另按输入格式选择。
 - 引用的资源路径以本 `SKILL.md` 所在目录为基准。运行脚本时使用解析后的完整路径，并向脚本传入输入文件的完整路径；不要假定终端当前目录就是技能目录。按环境选择 `python`、`python3` 或 `py -3`。
-- Codex 的显式调用名为 `$xiaoming-reference-audit-skill`；Claude Code 为 `/xiaoming-reference-audit-skill`。Claude 网页端在启用上传的技能后，通过自然语言请求使用本技能。调用语法不属于文献处理逻辑，不要混用。
+- Codex 的显式调用名为 `$xm-ref-audit`；Claude Code 为 `/xm-ref-audit`。Claude 网页端在启用上传的技能后，通过自然语言请求使用本技能。调用语法不属于文献处理逻辑，不要混用。
 - 先确认该环境可读写输入文件、访问证据来源并运行所需工具。平台缺少网页访问、代码执行、OCR 或渲染能力时，继续可完成的部分并明确未验证项，不要求用户改用某个品牌，也不降低真实性门槛。中文、英文请求均适用；报告默认使用用户语言。
 
 ## 工作流程

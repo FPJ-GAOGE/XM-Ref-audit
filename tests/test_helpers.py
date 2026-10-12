@@ -5,7 +5,7 @@ import importlib.util
 from pathlib import Path
 import unittest
 
-ROOT = Path(__file__).resolve().parents[1] / "skills" / "xiaoming-reference-audit-skill" / "scripts"
+ROOT = Path(__file__).resolve().parents[1] / "skills" / "xm-ref-audit" / "scripts"
 
 
 def load(name):

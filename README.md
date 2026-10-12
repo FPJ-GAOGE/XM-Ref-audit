@@ -1,12 +1,12 @@
-# xiaoming's reference-audit-skill
+# XM-Ref-audit
 
-Display name / 展示名称: **xiaoming's reference-audit-skill**
+Display name / 展示名称: **XM-Ref-audit**
 
-Skill ID / 技能标识: `xiaoming-reference-audit-skill`
+Skill ID / 技能标识: `xm-ref-audit`
 
-Codex: `$xiaoming-reference-audit-skill` · Claude Code: `/xiaoming-reference-audit-skill`
+Codex: `$xm-ref-audit` · Claude Code: `/xm-ref-audit`
 
-[Download portable skill ZIP / 下载通用技能 ZIP](dist/xiaoming-reference-audit-skill.zip)
+[Download portable skill ZIP / 下载通用技能 ZIP](dist/xm-ref-audit.zip)
 
 ## Overview / 用途
 
@@ -84,13 +84,13 @@ The lecture emphasizes **consistency** and maintaining a personal **BibTeX libra
 
    根据投稿模板设置输出格式，重新编译并检查页数、大小写和引用对应关系，再核查出版状态与正文论断支持情况。
 
-Official exports supply bibliographic data; `.bst`, BibLaTeX, and submission rules determine the final presentation. If no export exists, rebuild an entry from the original publication and label that provenance accurately. Successful retrieval is not an all-clear audit. See the [retrieval and LaTeX repair workflow](skills/xiaoming-reference-audit-skill/references/latex-retrieval.md).
+Official exports supply bibliographic data; `.bst`, BibLaTeX, and submission rules determine the final presentation. If no export exists, rebuild an entry from the original publication and label that provenance accurately. Successful retrieval is not an all-clear audit. See the [retrieval and LaTeX repair workflow](skills/xm-ref-audit/references/latex-retrieval.md).
 
-官网导出提供的是书目数据；最终显示方式仍由 `.bst`、BibLaTeX 或投稿规范决定。若官网无导出入口，可依据正式原文重建条目并如实标注来源。不能把“下载成功”当成“引用全部正确”。详见 [网站取回与 LaTeX 修复流程](skills/xiaoming-reference-audit-skill/references/latex-retrieval.md)。
+官网导出提供的是书目数据；最终显示方式仍由 `.bst`、BibLaTeX 或投稿规范决定。若官网无导出入口，可依据正式原文重建条目并如实标注来源。不能把“下载成功”当成“引用全部正确”。详见 [网站取回与 LaTeX 修复流程](skills/xm-ref-audit/references/latex-retrieval.md)。
 
-> Use xiaoming-reference-audit-skill to check paper.tex and refs.bib. Visit each publication's official website or DOI endpoint, retrieve BibTeX, verify its title, authors, and version, then repair refs.bib while keeping the existing keys. Compile with the submission template and return source links and a citation audit report.
+> Use xm-ref-audit to check paper.tex and refs.bib. Visit each publication's official website or DOI endpoint, retrieve BibTeX, verify its title, authors, and version, then repair refs.bib while keeping the existing keys. Compile with the submission template and return source links and a citation audit report.
 >
-> 使用 xiaoming-reference-audit-skill 检查 paper.tex 和 refs.bib。请逐条访问对应论文官网或 DOI 官方入口，取回正确的 BibTeX，核对题名、作者和版本后补全并修复 refs.bib；保留原引用键，按投稿模板编译，最后给出来源链接与引用核查报告。
+> 使用 xm-ref-audit 检查 paper.tex 和 refs.bib。请逐条访问对应论文官网或 DOI 官方入口，取回正确的 BibTeX，核对题名、作者和版本后补全并修复 refs.bib；保留原引用键，按投稿模板编译，最后给出来源链接与引用核查报告。
 
 ## Installation / 安装
 
@@ -100,18 +100,18 @@ The same core files work across these platforms without an OpenAI or Anthropic S
 
 | Platform<br><br>平台 | Installation<br><br>安装方式 | Invocation<br><br>调用方式 |
 | --- | --- | --- |
-| Codex (locally verified configuration)<br><br>Codex（本项目已验证的本地配置） | Copy `skills/xiaoming-reference-audit-skill` into `$CODEX_HOME/skills/`, or `~/.codex/skills/` when unset<br><br>将 `skills/xiaoming-reference-audit-skill` 复制到 `$CODEX_HOME/skills/`，未设置时为 `~/.codex/skills/` | `$xiaoming-reference-audit-skill` |
-| Claude Code, personal<br><br>Claude Code，个人使用 | Copy the same folder into `~/.claude/skills/`<br><br>将同一目录复制到 `~/.claude/skills/` | `/xiaoming-reference-audit-skill` |
-| Claude Code, project<br><br>Claude Code，单个项目 | Copy it into the target project's `.claude/skills/`<br><br>复制到目标项目的 `.claude/skills/` | `/xiaoming-reference-audit-skill` |
-| Claude web / clients supporting skill uploads<br><br>Claude 网页端／支持技能上传的客户端 | Download the dedicated ZIP above, upload it via **Customize → Skills → + Create skill → Upload a skill**, then enable it<br><br>下载上方专用 ZIP，在 **Customize → Skills → + Create skill → Upload a skill** 上传并启用 | Ask naturally to use `xiaoming-reference-audit-skill`<br><br>用自然语言请求使用 `xiaoming-reference-audit-skill` |
+| Codex (locally verified configuration)<br><br>Codex（本项目已验证的本地配置） | Copy `skills/xm-ref-audit` into `$CODEX_HOME/skills/`, or `~/.codex/skills/` when unset<br><br>将 `skills/xm-ref-audit` 复制到 `$CODEX_HOME/skills/`，未设置时为 `~/.codex/skills/` | `$xm-ref-audit` |
+| Claude Code, personal<br><br>Claude Code，个人使用 | Copy the same folder into `~/.claude/skills/`<br><br>将同一目录复制到 `~/.claude/skills/` | `/xm-ref-audit` |
+| Claude Code, project<br><br>Claude Code，单个项目 | Copy it into the target project's `.claude/skills/`<br><br>复制到目标项目的 `.claude/skills/` | `/xm-ref-audit` |
+| Claude web / clients supporting skill uploads<br><br>Claude 网页端／支持技能上传的客户端 | Download the dedicated ZIP above, upload it via **Customize → Skills → + Create skill → Upload a skill**, then enable it<br><br>下载上方专用 ZIP，在 **Customize → Skills → + Create skill → Upload a skill** 上传并启用 | Ask naturally to use `xm-ref-audit`<br><br>用自然语言请求使用 `xm-ref-audit` |
 
 See the official [Claude Code documentation](https://code.claude.com/docs/en/skills) and [Claude upload instructions](https://support.claude.com/en/articles/12512180-use-skills-in-claude). Account or organization settings may restrict skills. Enable code execution and file creation; evidence verification also needs web access.
 
 Claude 安装位置与调用语法依据 [Claude Code 官方文档](https://code.claude.com/docs/en/skills)；ZIP 上传依据 [Claude 官方帮助](https://support.claude.com/en/articles/12512180-use-skills-in-claude)。技能上传和执行取决于账户与组织设置，需启用代码执行和文件创建；联网核查还要求可用的网页访问能力。
 
-The identifier uses lowercase letters and hyphens; the display name retains its apostrophe. `agents/openai.yaml` is optional Codex UI metadata, not a runtime dependency. The portable ZIP omits it and contains one top-level skill folder with `SKILL.md` and its resources. Upload that ZIP, not GitHub's archive of the entire repository.
+The identifier uses lowercase letters and hyphens; the display name is XM-Ref-audit. `agents/openai.yaml` is optional Codex UI metadata, not a runtime dependency. The portable ZIP omits it and contains one top-level skill folder with `SKILL.md` and its resources. Upload that ZIP, not GitHub's archive of the entire repository.
 
-目录名和机器标识使用小写字母与连字符；展示名称保留所有格撇号。`agents/openai.yaml` 仅为可选的 Codex 界面信息，Claude 无需它；通用 ZIP 不包含该目录。ZIP 内直接是 `xiaoming-reference-audit-skill/SKILL.md` 和配套资源，不要拿包含整仓库的 GitHub 源码 ZIP 直接上传。
+目录名和机器标识使用小写字母与连字符；展示名称为 XM-Ref-audit。`agents/openai.yaml` 仅为可选的 Codex 界面信息，Claude 无需它；通用 ZIP 不包含该目录。ZIP 内直接是 `xm-ref-audit/SKILL.md` 和配套资源，不要拿包含整仓库的 GitHub 源码 ZIP 直接上传。
 
 Run the following commands from the repository root to install for Claude Code. If the target already exists, compare it before updating to preserve custom changes.
 
@@ -119,20 +119,20 @@ Run the following commands from the repository root to install for Claude Code. 
 
 ```powershell
 # Windows PowerShell
-$skillTarget = Join-Path $env:USERPROFILE '.claude/skills/xiaoming-reference-audit-skill'
+$skillTarget = Join-Path $env:USERPROFILE '.claude/skills/xm-ref-audit'
 if (Test-Path -LiteralPath $skillTarget) { throw 'Skill already exists; compare before updating.' }
 New-Item -ItemType Directory -Path (Split-Path -Parent $skillTarget) -Force | Out-Null
-Copy-Item -LiteralPath './skills/xiaoming-reference-audit-skill' -Destination $skillTarget -Recurse
+Copy-Item -LiteralPath './skills/xm-ref-audit' -Destination $skillTarget -Recurse
 ```
 
 ```sh
 # macOS / Linux
-skill_target="$HOME/.claude/skills/xiaoming-reference-audit-skill"
+skill_target="$HOME/.claude/skills/xm-ref-audit"
 if [ -e "$skill_target" ]; then
   echo 'Skill already exists; compare before updating.'
 else
   mkdir -p "$HOME/.claude/skills"
-  cp -R skills/xiaoming-reference-audit-skill "$skill_target"
+  cp -R skills/xm-ref-audit "$skill_target"
 fi
 ```
 
@@ -144,35 +144,35 @@ Provide the manuscript and its bibliography files. Specify the required citation
 
 The examples below use Codex syntax. In Claude Code, replace the invocation with:
 
-下面示例采用 Codex 语法。在 Claude Code 中，将开头替换为 `/xiaoming-reference-audit-skill`，例如：
+下面示例采用 Codex 语法。在 Claude Code 中，将开头替换为 `/xm-ref-audit`，例如：
 
 ```text
-/xiaoming-reference-audit-skill Check paper.tex and refs.bib within eight pages including references. Select the mode automatically and verify every citation.
+/xm-ref-audit Check paper.tex and refs.bib within eight pages including references. Select the mode automatically and verify every citation.
 
-/xiaoming-reference-audit-skill 检查 paper.tex 和 refs.bib，限 8 页（含参考文献），自动选择档位并逐条核查引用。
+/xm-ref-audit 检查 paper.tex 和 refs.bib，限 8 页（含参考文献），自动选择档位并逐条核查引用。
 ```
 
-In Claude web, enable the uploaded skill, attach the manuscript, and ask: “Use xiaoming-reference-audit-skill to check this manuscript,” followed by the same constraints.
+In Claude web, enable the uploaded skill, attach the manuscript, and ask: “Use xm-ref-audit to check this manuscript,” followed by the same constraints.
 
-在 Claude 网页端启用技能并上传文章后，直接说“请使用 xiaoming-reference-audit-skill 检查这篇文章”，再附上相同约束。
+在 Claude 网页端启用技能并上传文章后，直接说“请使用 xm-ref-audit 检查这篇文章”，再附上相同约束。
 
 ### LaTeX: automatic selection within a page budget / LaTeX：按页数自动选档
 
-> Use $xiaoming-reference-audit-skill to check paper.tex and refs.bib. The submission limit is eight pages, including references. Select the most detailed compliant mode that fits, correct formatting and missing fields, and verify every reference and the claims it supports.
+> Use $xm-ref-audit to check paper.tex and refs.bib. The submission limit is eight pages, including references. Select the most detailed compliant mode that fits, correct formatting and missing fields, and verify every reference and the claims it supports.
 >
-> 使用 $xiaoming-reference-audit-skill 检查 paper.tex 和 refs.bib。投稿模板限制 8 页，参考文献计入页数；自动选择合规的最详细档位，修正格式与缺项，并核查所有引用及其支持的论断。
+> 使用 $xm-ref-audit 检查 paper.tex 和 refs.bib。投稿模板限制 8 页，参考文献计入页数；自动选择合规的最详细档位，修正格式与缺项，并核查所有引用及其支持的论断。
 
 ### Word: preserve the journal style / Word：保留期刊样式
 
-> Use $xiaoming-reference-audit-skill to audit article.docx. Keep the journal's citation style, use regular mode, and return a corrected document and an itemized evidence report.
+> Use $xm-ref-audit to audit article.docx. Keep the journal's citation style, use regular mode, and return a corrected document and an itemized evidence report.
 >
-> 使用 $xiaoming-reference-audit-skill 检查 article.docx，保持期刊样式，采用常规引用，输出修正版和逐条核查报告。
+> 使用 $xm-ref-audit 检查 article.docx，保持期刊样式，采用常规引用，输出修正版和逐条核查报告。
 
 ### PDF: only the final document is available / PDF：只有最终文件
 
-> Use $xiaoming-reference-audit-skill to audit scanned.pdf. If reliable reflow is unavailable, provide page-specific corrections, a master bibliography, and an annotated PDF. Clearly identify anything that could not be verified.
+> Use $xm-ref-audit to audit scanned.pdf. If reliable reflow is unavailable, provide page-specific corrections, a master bibliography, and an annotated PDF. Clearly identify anything that could not be verified.
 >
-> 使用 $xiaoming-reference-audit-skill 检查 scanned.pdf。若无法可靠重排，输出逐页修正清单、参考文献母库和批注版，明确无法验证的内容。
+> 使用 $xm-ref-audit 检查 scanned.pdf。若无法可靠重排，输出逐页修正清单、参考文献母库和批注版，明确无法验证的内容。
 
 ## Requirements and limitations / 依赖与边界
 
@@ -186,9 +186,9 @@ Word 引用管理器字段应通过原引擎更新；无法安全回写时提供
 
 ## Source / 来源
 
-The formatting guidance is derived from Xiaoming Duan's lecture, *How to Format Your Bibliography “Properly”?*, dated May 8, 2023. See the [slide-to-rule mapping](skills/xiaoming-reference-audit-skill/references/ppt-rules.md). The three display modes, page-budget logic, and evidence-audit workflow are project extensions, not requirements stated in the original lecture or an endorsement by its author. The repository excludes the original slide deck, chat attachments, and personal manuscripts.
+The formatting guidance is derived from Xiaoming Duan's lecture, *How to Format Your Bibliography “Properly”?*, dated May 8, 2023. See the [slide-to-rule mapping](skills/xm-ref-audit/references/ppt-rules.md). The three display modes, page-budget logic, and evidence-audit workflow are project extensions, not requirements stated in the original lecture or an endorsement by its author. The repository excludes the original slide deck, chat attachments, and personal manuscripts.
 
-根据 Xiaoming Duan 2023-05-08 的《How to Format Your Bibliography “Properly”?》讲义整理，见 [PPT 规则与页码映射](skills/xiaoming-reference-audit-skill/references/ppt-rules.md)。三档呈现、页数适配及真实性审计是本项目的扩展，不是原讲义规定，也不表示讲义作者认可本实现。仓库不包含原始 PPT、聊天附件或个人文章。
+根据 Xiaoming Duan 2023-05-08 的《How to Format Your Bibliography “Properly”?》讲义整理，见 [PPT 规则与页码映射](skills/xm-ref-audit/references/ppt-rules.md)。三档呈现、页数适配及真实性审计是本项目的扩展，不是原讲义规定，也不表示讲义作者认可本实现。仓库不包含原始 PPT、聊天附件或个人文章。
 
 ## Helpers and tests / 辅助工具与测试
 
@@ -198,18 +198,18 @@ The helper scripts require only the Python 3.10+ standard library.
 
 ```sh
 python -m unittest discover -s tests -v
-python skills/xiaoming-reference-audit-skill/scripts/select_mode.py measurements.json
-python skills/xiaoming-reference-audit-skill/scripts/check_audit.py audit.json
-python skills/xiaoming-reference-audit-skill/scripts/fetch_doi.py 10.1093/comjnl/27.2.97 --out retrieval-knuth
+python skills/xm-ref-audit/scripts/select_mode.py measurements.json
+python skills/xm-ref-audit/scripts/check_audit.py audit.json
+python skills/xm-ref-audit/scripts/fetch_doi.py 10.1093/comjnl/27.2.97 --out retrieval-knuth
 python tools/package_skill.py
 ```
 
 Input formats / 输入格式:
 
-- [Page budgets and display modes / 页数与三档规则](skills/xiaoming-reference-audit-skill/references/modes.md)
-- [Evidence review and audit records / 证据核查与审计结构](skills/xiaoming-reference-audit-skill/references/verification.md)
-- [Format-specific workflows / 不同文件的处理方式](skills/xiaoming-reference-audit-skill/references/file-workflows.md)
-- [Retrieve LaTeX citations from source websites / 从网站取回 LaTeX 引用](skills/xiaoming-reference-audit-skill/references/latex-retrieval.md)
+- [Page budgets and display modes / 页数与三档规则](skills/xm-ref-audit/references/modes.md)
+- [Evidence review and audit records / 证据核查与审计结构](skills/xm-ref-audit/references/verification.md)
+- [Format-specific workflows / 不同文件的处理方式](skills/xm-ref-audit/references/file-workflows.md)
+- [Retrieve LaTeX citations from source websites / 从网站取回 LaTeX 引用](skills/xm-ref-audit/references/latex-retrieval.md)
 
 `fetch_doi.py` retrieves BibTeX and CSL-JSON through the official DOI endpoint and saves a retrieval log. Use a new output directory. Exit code 0 means both formats were retrieved, 1 means incomplete retrieval, and 2 indicates an input or filesystem error. See the [official Crossref documentation](https://www.crossref.org/documentation/retrieve-metadata/content-negotiation/).
 

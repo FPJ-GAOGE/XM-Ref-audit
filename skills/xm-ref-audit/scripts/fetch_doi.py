@@ -54,7 +54,7 @@ def fetch(doi, output, timeout=20):
                 "accessed_at": datetime.now(timezone.utc).isoformat()}
         try:
             request = urllib.request.Request(url, headers={"Accept": mime,
-                "User-Agent": "xiaoming-reference-audit-skill/1.0"})
+                "User-Agent": "xm-ref-audit/1.0"})
             with urllib.request.urlopen(request, timeout=timeout) as response:
                 item["response_url"] = response.geturl()
                 item["content_type"] = response.headers.get("Content-Type", "")
