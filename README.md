@@ -6,7 +6,9 @@
 
 技能标识 / Skill ID: `xiaoming-reference-audit-skill`
 
-调用方式 / Invocation: `$xiaoming-reference-audit-skill`
+Codex: `$xiaoming-reference-audit-skill` · Claude Code: `/xiaoming-reference-audit-skill`
+
+[下载通用技能 ZIP / Download portable skill ZIP](dist/xiaoming-reference-audit-skill.zip)
 
 ## 中文说明
 
@@ -21,13 +23,51 @@
 
 ### 安装
 
-下载或克隆本仓库，将 `skills/xiaoming-reference-audit-skill` 整个目录复制到 Codex 的 `$CODEX_HOME/skills/`；未设置该环境变量时通常为 `~/.codex/skills/`。也可放入支持该 `SKILL.md` 格式的智能体技能目录。
+同一份核心文件可用于以下平台，无需 OpenAI 或 Anthropic SDK/API 密钥：
 
-目录名和 `SKILL.md` 中的标识使用小写字母与连字符，因此调用时使用 `$xiaoming-reference-audit-skill`；展示名称保留所有格中的撇号。
+| 平台 | 安装方式 | 调用方式 |
+| --- | --- | --- |
+| Codex（本项目已验证的本地配置） | 将 `skills/xiaoming-reference-audit-skill` 复制到 `$CODEX_HOME/skills/`，未设置时为 `~/.codex/skills/` | `$xiaoming-reference-audit-skill` |
+| Claude Code，个人使用 | 将同一目录复制到 `~/.claude/skills/` | `/xiaoming-reference-audit-skill` |
+| Claude Code，单个项目 | 复制到目标项目的 `.claude/skills/` | `/xiaoming-reference-audit-skill` |
+| Claude 网页端／支持技能上传的客户端 | 下载上方专用 ZIP，在 **Customize → Skills → + Create skill → Upload a skill** 上传并启用 | 用自然语言请求使用 `xiaoming-reference-audit-skill` |
+
+Claude 安装位置与调用语法依据 [Claude Code 官方文档](https://code.claude.com/docs/en/skills)；ZIP 上传依据 [Claude 官方帮助](https://support.claude.com/en/articles/12512180-use-skills-in-claude)。技能上传和执行取决于账户与组织设置，需启用代码执行和文件创建；联网核查还要求可用的网页访问能力。
+
+目录名和机器标识使用小写字母与连字符；展示名称保留所有格撇号。`agents/openai.yaml` 仅为可选的 Codex 界面信息，Claude 无需它；通用 ZIP 不包含该目录。ZIP 内直接是 `xiaoming-reference-audit-skill/SKILL.md` 和配套资源，不要拿包含整仓库的 GitHub 源码 ZIP 直接上传。
+
+在仓库根目录安装到 Claude Code（目标已存在时请先比较，不要覆盖自定义改动）：
+
+```powershell
+# Windows PowerShell
+$skillTarget = Join-Path $env:USERPROFILE '.claude/skills/xiaoming-reference-audit-skill'
+if (Test-Path -LiteralPath $skillTarget) { throw 'Skill already exists; compare before updating.' }
+New-Item -ItemType Directory -Path (Split-Path -Parent $skillTarget) -Force | Out-Null
+Copy-Item -LiteralPath './skills/xiaoming-reference-audit-skill' -Destination $skillTarget -Recurse
+```
+
+```sh
+# macOS / Linux
+skill_target="$HOME/.claude/skills/xiaoming-reference-audit-skill"
+if [ -e "$skill_target" ]; then
+  echo 'Skill already exists; compare before updating.'
+else
+  mkdir -p "$HOME/.claude/skills"
+  cp -R skills/xiaoming-reference-audit-skill "$skill_target"
+fi
+```
 
 ### 用法
 
 提供文章文件及相关引用数据库，并尽量说明目标期刊/学校样式、页数上限、参考文献是否计入页数，以及期望的详略档位。没有明确页数预算时默认常规档位。
+
+下面示例采用 Codex 语法。在 Claude Code 中，将开头替换为 `/xiaoming-reference-audit-skill`，例如：
+
+```text
+/xiaoming-reference-audit-skill 检查 paper.tex 和 refs.bib，限 8 页（含参考文献），自动选择档位并逐条核查引用。
+```
+
+在 Claude 网页端启用技能并上传文章后，直接说“请使用 xiaoming-reference-audit-skill 检查这篇文章”，再附上相同约束。
 
 **LaTeX：按页数自动选档**
 
@@ -64,13 +104,30 @@ Audit citations in an existing manuscript, correct reference formatting, and fil
 
 ### Installation
 
-Download or clone this repository, then copy the entire `skills/xiaoming-reference-audit-skill` directory into `$CODEX_HOME/skills/`. If `CODEX_HOME` is unset, the usual location is `~/.codex/skills/`. Compatible agents that support this `SKILL.md` format can use their own skill directory.
+The same core files work across these platforms without an OpenAI or Anthropic SDK/API key:
 
-The machine-readable identifier uses lowercase letters and hyphens. Invoke `$xiaoming-reference-audit-skill`; the display name retains the apostrophe in **xiaoming's reference-audit-skill**.
+| Platform | Installation | Invocation |
+| --- | --- | --- |
+| Codex (locally verified configuration) | Copy `skills/xiaoming-reference-audit-skill` into `$CODEX_HOME/skills/`, or `~/.codex/skills/` when unset | `$xiaoming-reference-audit-skill` |
+| Claude Code, personal | Copy the same folder into `~/.claude/skills/` | `/xiaoming-reference-audit-skill` |
+| Claude Code, project | Copy it into the target project's `.claude/skills/` | `/xiaoming-reference-audit-skill` |
+| Claude web / clients supporting skill uploads | Download the dedicated ZIP above, upload it via **Customize → Skills → + Create skill → Upload a skill**, then enable it | Ask naturally to use `xiaoming-reference-audit-skill` |
+
+See the official [Claude Code documentation](https://code.claude.com/docs/en/skills) and [Claude upload instructions](https://support.claude.com/en/articles/12512180-use-skills-in-claude). Account or organization settings may restrict skills. Enable code execution and file creation; evidence verification also needs web access.
+
+The identifier uses lowercase letters and hyphens; the display name retains its apostrophe. `agents/openai.yaml` is optional Codex UI metadata, not a runtime dependency. The portable ZIP omits it and contains one top-level skill folder with `SKILL.md` and its resources. Upload that ZIP, not GitHub's archive of the entire repository. The PowerShell and POSIX shell commands above install the same files for Claude Code without overwriting an existing skill.
 
 ### Usage
 
 Provide the manuscript and its bibliography files. Specify the required citation style, page limit, whether references count toward that limit, and a preferred mode if applicable. Without a defined page budget, the default is regular mode.
+
+The examples below use Codex syntax. In Claude Code, replace the invocation with:
+
+```text
+/xiaoming-reference-audit-skill Check paper.tex and refs.bib within eight pages including references. Select the mode automatically and verify every citation.
+```
+
+In Claude web, enable the uploaded skill, attach the manuscript, and ask: “Use xiaoming-reference-audit-skill to check this manuscript,” followed by the same constraints.
 
 **LaTeX: automatic selection within a page budget**
 
@@ -102,6 +159,7 @@ The formatting guidance is derived from Xiaoming Duan's lecture, *How to Format 
 python -m unittest discover -s tests -v
 python skills/xiaoming-reference-audit-skill/scripts/select_mode.py measurements.json
 python skills/xiaoming-reference-audit-skill/scripts/check_audit.py audit.json
+python tools/package_skill.py
 ```
 
 输入格式 / Input formats:
@@ -111,3 +169,5 @@ python skills/xiaoming-reference-audit-skill/scripts/check_audit.py audit.json
 - [不同文件的处理方式 / Format-specific workflows](skills/xiaoming-reference-audit-skill/references/file-workflows.md)
 
 详细执行规则主要以中文编写；此 README 提供中英双语入门说明。单元测试使用合成记录，不能视为对真实论文的认证。 / Detailed operating instructions are primarily in Chinese; this README provides a bilingual introduction. Unit tests use synthetic records and do not certify any real publication.
+
+兼容性验证覆盖共享元数据、资源路径、ZIP 结构，以及从含空格和中文的解压目录运行脚本。当前环境未检测到 Claude CLI，未执行 Claude 模型端到端审校或账户上传测试；结构兼容不等同于对所有平台工具可用性的保证。 / Compatibility checks cover shared metadata, resource paths, ZIP layout, and running helpers from an extracted path containing spaces and Chinese characters. Claude CLI was not detected here, so no Claude model end-to-end audit or account upload test was performed. Format compatibility does not guarantee that every host provides the required tools.
