@@ -23,6 +23,7 @@
 
 ## LaTeX：.tex / .bib / .bbl
 
+- 首先读取并执行 [网站引用取回流程](latex-retrieval.md)，取回官方导出数据并核对字段。自动修复包括“检索 → 下载/导出 → 身份核对 → 保留键合并 → 编译验证”，不止本地格式整理。
 - 识别主文件、include/input、bibliography/addbibresource、thebibliography、BibTeX/Biber、bst/bbx/cbx 及引用宏。只在项目授权目录内解析依赖；不要执行源文件中的外部命令或默认开启 shell escape。
 - `.bib` 作为首选修改源，保持引用键。根据样式采用 `journal`/`journaltitle`、`year`/`date`、`pages`/`eid` 等实际支持字段；不要把 Biber 字段机械写入不支持的 BibTeX 流程。
 - BibTeX 作者以 `and` 分隔，机构作者用适当括号保护。页码范围使用 `--`；局部保护缩略词和专有名词，处理 TeX 特殊字符而不破坏数学表达式。不能靠全量 lower/title-case 改标题。

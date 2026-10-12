@@ -21,6 +21,42 @@ Codex: `$xiaoming-reference-audit-skill` · Claude Code: `/xiaoming-reference-au
 - **逐条证据核查**：区分文献存在、元数据匹配、出版状态，以及文献是否支持正文中的具体论断。记录证据链接、核查日期和原文定位。
 - **可追溯交付**：在格式和工具允许时输出修正版，并提供完整母库、变更清单和核查报告。无法核实的内容保留为待核查，不猜测补全。
 
+### 为什么要在意引用格式？
+
+讲义第 4–5 页指出，参考文献首先用于给前人研究以应有的归属，让读者找到相关工作，并避免抄袭。准确的作者、题名和出版信息使这些目的真正可实现。清楚、统一的格式也体现专业性和对细节的重视，让读者不必猜测一条记录指的是哪篇作品；它不是提升录用概率的保证。
+
+讲义还区分了 **reference list**（正文实际引用的文献）与 **bibliography**（还可能包含读过但未引用的材料）。本技能先识别用户需要哪一种，检查正文与文末的对应关系，而不会无条件删掉所有未引用条目。
+
+### 常见错误，以及本技能怎样修复
+
+下表依据讲义第 8–13 页的文字与示例归纳。格式规则以投稿要求为准，所有事实字段都需查证。
+
+| 常见问题 | 具体表现 | 本技能的处理 |
+| --- | --- | --- |
+| 信息不完整 | 缺卷期、页码、文章编号或出版源 | 访问论文官网或 DOI 元数据服务，核对身份后补齐实际存在的字段；没有查到则标待核查 |
+| 出版信息过时 | 已有正式出版记录，仍保留 early access 的 `1–1` 页码 | 比较在线先发和正式卷期记录，核实同一作品与版本后更新，并记录年份选择依据 |
+| 标题大小写错误 | `matlab`、`kalman`、`rl` 被错误转成小写，冒号后首词处理不一致 | 在目标体例下修正大小写，为 BibTeX 中的 `{MATLAB}`、`{Kalman}`、`{RL}` 做局部保护 |
+| 作者显示混乱 | 姓名缩写、全名、作者截断规则混用 | 保留母库中的完整作者及顺序，让目标样式统一显示；不凭缩写猜作者全名 |
+| 会议/期刊名称不一致 | 全称与非标准简称混用，出版源大小写错误，只有卷页却没有 venue | 核对正式出版源，按同一体例选择全称或权威简称，并补回遗漏的 venue |
+| 重复或多余信息 | 会议年、会次、出版商或 DOI/URL 重复显示 | 区分母库信息与输出冗余，按类型和模板消除重复；不一律删除出版社或 URL |
+| 条目类型不对 | 把会议论文、书籍章节、期刊文章混为一类 | 查询正式记录，修正类型及对应字段，避免把论文集卷号当期刊卷期 |
+| 引用键或映射出错 | 重键、悬空 `\cite`、合并记录后引用错位 | 默认保留既有键，核对所有引用位置；必须改键时同步更新映射并重新编译 |
+| 导出记录存在错误 | 从搜索工具或官网导出的条目仍缺字段、未保护专名，或 DOI 指向另一篇文章 | 将导出当候选数据逐字段核对；身份冲突时停止自动合并，不用相似论文的信息替换 |
+
+讲义反复强调**一致性**和维护自己的 **BibTeX 文献库**。本技能据此将完整母库与最终显示分开：极简模式也保留已核实的完整信息，后续投稿换样式时可以复用。
+
+### LaTeX：从对应网站找回引用，再修复项目
+
+1. 读取 `.tex` 和 `.bib`，列出实际引用、原引用键及待修复字段。
+2. 用 DOI 或题名与作者定位对应论文官网，核对作品身份及版本。
+3. 从官网 **Cite / Export citation** 入口取回 BibTeX/RIS；也可从 DOI 官方内容协商入口取回 BibTeX 和 CSL-JSON，并保存原始数据、来源网址和检索时间。
+4. 将取回记录与原文、现有条目逐字段比较，只合并有依据的补全和更正，保留项目原引用键。
+5. 根据投稿模板设置输出格式，重新编译并检查页数、大小写和引用对应关系，再核查出版状态与正文论断支持情况。
+
+官网导出提供的是书目数据；最终显示方式仍由 `.bst`、BibLaTeX 或投稿规范决定。若官网无导出入口，可依据正式原文重建条目并如实标注来源。不能把“下载成功”当成“引用全部正确”。详见 [网站取回与 LaTeX 修复流程](skills/xiaoming-reference-audit-skill/references/latex-retrieval.md)。
+
+> 使用 xiaoming-reference-audit-skill 检查 paper.tex 和 refs.bib。请逐条访问对应论文官网或 DOI 官方入口，取回正确的 BibTeX，核对题名、作者和版本后补全并修复 refs.bib；保留原引用键，按投稿模板编译，最后给出来源链接与引用核查报告。
+
 ### 安装
 
 同一份核心文件可用于以下平台，无需 OpenAI 或 Anthropic SDK/API 密钥：
@@ -102,6 +138,42 @@ Audit citations in an existing manuscript, correct reference formatting, and fil
 - **Evidence review:** Assess publication identity, metadata accuracy, publication status, and support for each cited claim separately. Record source links, access dates, and locations in the original work.
 - **Traceable outputs:** Where the format and tools permit, deliver a corrected manuscript, a complete bibliography, a change log, and an audit report. Leave unverified information explicitly unresolved rather than inventing it.
 
+### Why reference formatting matters
+
+Slides 4–5 explain that references give credit, help readers find related work, and help avoid plagiarism. Accurate authorship, titles, and publication details make those purposes achievable. Clear, consistent formatting reflects professionalism and attention to detail; it is not a promise of a higher acceptance rate.
+
+The lecture distinguishes a **reference list**, containing works cited in the manuscript, from a **bibliography**, which may also include uncited reading. The skill checks the intended scope before resolving citation-to-entry mismatches; it does not automatically remove every uncited item.
+
+### Common mistakes and how the skill fixes them
+
+This table summarizes the guidance and examples in slides 8–13. Submission requirements determine presentation, while factual fields require source verification.
+
+| Problem | Typical example | Repair approach |
+| --- | --- | --- |
+| Missing information | Absent volume, issue, pages, article number, or venue | Retrieve official publication data, match the work, and fill confirmed fields; flag unknowns |
+| Outdated publication details | An early-access `1–1` page range remains after final publication | Compare online-first and final records, confirm identity/version, then update with documented date choices |
+| Incorrect capitalization | `matlab`, `kalman`, or `rl` loses its intended case | Apply the target style and locally protect `{MATLAB}`, `{Kalman}`, and `{RL}` in BibTeX |
+| Inconsistent author display | Mixed initials, full names, or truncation rules | Keep full ordered author data in the master library and let the style handle presentation |
+| Inconsistent or missing venues | Mixed unofficial abbreviations or entries containing only volume/pages | Verify the official venue and consistently use full names or authoritative abbreviations |
+| Redundant information | Repeated conference years, editions, publishers, or DOI/URL strings | Remove display redundancy according to item type and style, without blindly deleting source fields |
+| Wrong entry type | Conference papers, book chapters, and journal articles are confused | Check the publication record and correct the entry type and its corresponding fields |
+| Broken citation mapping | Duplicate keys, unresolved `\cite`, or incorrect merges | Preserve existing keys, update mappings where necessary, and recompile |
+| Faulty imported records | Exported metadata has missing fields or a DOI for a different work | Treat exports as candidates, compare fields, and stop automatic merging when identity conflicts |
+
+The lecture emphasizes **consistency** and maintaining a personal **BibTeX library**. The skill separates complete verified records from their displayed form, so minimal mode does not destroy metadata needed for a later submission style.
+
+### LaTeX: retrieve citations from the source website, then repair the project
+
+1. Read `.tex` and `.bib` files and inventory cited works, existing keys, and problematic fields.
+2. Locate the official publication page using a DOI or title and authors; confirm the work and version.
+3. Download BibTeX/RIS through the website's **Cite / Export citation** function, or retrieve BibTeX and CSL-JSON through DOI content negotiation. Preserve raw records, source URLs, and retrieval times.
+4. Compare retrieved data against the publication and existing entry, merge only supported corrections, and preserve the manuscript's citation keys.
+5. Render through the required bibliography style, check the compiled output and page budget, then review publication status and support for each cited claim.
+
+Official exports supply bibliographic data; `.bst`, BibLaTeX, and submission rules determine the final presentation. If no export exists, rebuild an entry from the original publication and label that provenance accurately. Successful retrieval is not an all-clear audit. See the [retrieval and LaTeX repair workflow](skills/xiaoming-reference-audit-skill/references/latex-retrieval.md).
+
+> Use xiaoming-reference-audit-skill to check paper.tex and refs.bib. Visit each publication's official website or DOI endpoint, retrieve BibTeX, verify its title, authors, and version, then repair refs.bib while keeping the existing keys. Compile with the submission template and return source links and a citation audit report.
+
 ### Installation
 
 The same core files work across these platforms without an OpenAI or Anthropic SDK/API key:
@@ -159,6 +231,7 @@ The formatting guidance is derived from Xiaoming Duan's lecture, *How to Format 
 python -m unittest discover -s tests -v
 python skills/xiaoming-reference-audit-skill/scripts/select_mode.py measurements.json
 python skills/xiaoming-reference-audit-skill/scripts/check_audit.py audit.json
+python skills/xiaoming-reference-audit-skill/scripts/fetch_doi.py 10.1093/comjnl/27.2.97 --out retrieval-knuth
 python tools/package_skill.py
 ```
 
@@ -167,7 +240,16 @@ python tools/package_skill.py
 - [页数与三档规则 / Page budgets and display modes](skills/xiaoming-reference-audit-skill/references/modes.md)
 - [证据核查与审计结构 / Evidence review and audit records](skills/xiaoming-reference-audit-skill/references/verification.md)
 - [不同文件的处理方式 / Format-specific workflows](skills/xiaoming-reference-audit-skill/references/file-workflows.md)
+- [从网站取回 LaTeX 引用 / Retrieve LaTeX citations from source websites](skills/xiaoming-reference-audit-skill/references/latex-retrieval.md)
+
+`fetch_doi.py` 通过 DOI 官方入口取回 BibTeX 与 CSL-JSON，并保留检索记录。输出目录须为新目录；退出码 0 仅表示两种格式都成功取回，1 表示检索不完整，2 表示输入或文件错误。使用依据来自 [Crossref 官方说明](https://www.crossref.org/documentation/retrieve-metadata/content-negotiation/)。 / `fetch_doi.py` retrieves BibTeX and CSL-JSON through the official DOI endpoint and saves a retrieval log. Use a new output directory. Exit code 0 means both formats were retrieved, 1 means incomplete retrieval, and 2 indicates an input or filesystem error. See the [official Crossref documentation](https://www.crossref.org/documentation/retrieve-metadata/content-negotiation/).
 
 详细执行规则主要以中文编写；此 README 提供中英双语入门说明。单元测试使用合成记录，不能视为对真实论文的认证。 / Detailed operating instructions are primarily in Chinese; this README provides a bilingual introduction. Unit tests use synthetic records and do not certify any real publication.
 
 兼容性验证覆盖共享元数据、资源路径、ZIP 结构，以及从含空格和中文的解压目录运行脚本。当前环境未检测到 Claude CLI，未执行 Claude 模型端到端审校或账户上传测试；结构兼容不等同于对所有平台工具可用性的保证。 / Compatibility checks cover shared metadata, resource paths, ZIP layout, and running helpers from an extracted path containing spaces and Chinese characters. Claude CLI was not detected here, so no Claude model end-to-end audit or account upload test was performed. Format compatibility does not guarantee that every host provides the required tools.
+
+## 致谢 / Acknowledgments
+
+特别感谢**上海交通大学 IWIN-FINS 课题组的段晓明教授**。本 skill 的内容基于段晓明教授对我们文章的指导，并结合其关于参考文献规范的讲义整理而成。感谢他在文献引用、格式一致性和学术写作细节方面的悉心指导。
+
+We sincerely thank **Professor Xiaoming Duan of the IWIN-FINS research group at Shanghai Jiao Tong University**. This skill is based on his guidance on our manuscripts and draws on his lecture on reference formatting. We are grateful for his careful guidance on citation practices, consistency, and the details of scholarly writing.
