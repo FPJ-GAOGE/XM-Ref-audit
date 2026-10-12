@@ -1,0 +1,4 @@
+interface:
+  display_name: "xiaoming's reference-audit-skill"
+  short_description: "按页数预算审校 Word、PDF、LaTeX 引用格式，补全字段并逐条核查证据"
+  default_prompt: "请使用 $xiaoming-reference-audit-skill 检查这篇文章的引用，按页数限制选择详略档位，修正格式与缺项，并逐条核查文献真实性及其对正文论断的支持。"
